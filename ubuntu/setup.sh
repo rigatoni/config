@@ -18,11 +18,18 @@ curl -sL https://deb.nodesource.com/setup | sudo bash -
 sudo apt-get install -y nodejs
 sudo apt-get install -y build-essential
 
+# install global node modules
+npm install gulp -g
+npm install bower -g
+
 # install git
 sudo apt-get install git
 
 # checkout linguine-node to /var/www/linguine-node
 # copy linguine-node.conf to /etc/init/linguine-node.conf
+cd /var/www/linguine-node
+bower install --allow-root
+gulp build
 
 # start linguine-node
 sudo service linguine-node restart
