@@ -1,0 +1,14 @@
+# /etc/systemd/system/linguine-node.service
+
+[Service]
+ExecStart=/usr/bin/node /var/www/node-linguine-git/app.js
+Restart=always
+StandardOutput=syslog
+StandardError=syslog
+SyslogIdentifier=linguine-node
+User=root
+Group=root
+Environment=NODE_ENV=production
+
+[Install]
+WantedBy=multi-user.target
