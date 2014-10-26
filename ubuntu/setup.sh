@@ -25,9 +25,15 @@ npm install bower -g
 # install git
 sudo apt-get install git
 
-# checkout linguine-node to /var/www/linguine-node
-# copy linguine-node.conf to /etc/init/linguine-node.conf
-cd /var/www/linguine-node
+# checkout linguine-node to /var/www/linguine-node-git
+git clone https://github.com/rigatoni/linguine-node.git linguine-node-git
+git checkout develop
+
+# copy linguine-node.service to /etc/systemd/system/linguine-node.service
+sudo vim /etc/systemd/system/linguine-node.service
+# copy contents of https://github.com/rigatoni/config/blob/master/ubuntu/linguini-node.service
+
+cd /var/www/linguine-node-git
 bower install --allow-root
 gulp build
 
