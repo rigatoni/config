@@ -4,6 +4,7 @@
 # ssh into application server
 cd /var/www/linguine-node-git
 git pull
+sudo npm install
 bower install --allow-root
 gulp
 sudo service linguine-node restart
