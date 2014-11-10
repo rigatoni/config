@@ -38,6 +38,9 @@ cd linguine-python-git
 git checkout dev
 pip install -r requirements.txt
 
+# install punkt (needed for NLTK tokenization)
+python -m textblob.download_corpora
+
 # copy linguine-node.service to /etc/systemd/system/linguine-node.service
 sudo vim /etc/systemd/system/linguine-node.service
 # copy contents of https://github.com/rigatoni/config/blob/master/ubuntu/linguini-node.service
