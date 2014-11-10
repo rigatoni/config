@@ -12,6 +12,9 @@ echo 'deb http://downloads-distro.mongodb.org/repo/ubuntu-upstart dist 10gen' | 
 sudo apt-get update
 sudo apt-get install -y mongodb-org
 
+# install pip
+sudo apt-get install python-pip
+
 # install node
 # from https://github.com/joyent/node/wiki/installing-node.js-via-package-manager
 curl -sL https://deb.nodesource.com/setup | sudo bash -
@@ -28,6 +31,12 @@ sudo apt-get install git
 # checkout linguine-node to /var/www/linguine-node-git
 git clone https://github.com/rigatoni/linguine-node.git linguine-node-git
 git checkout develop
+
+# checkout linguine-python to /var/www/linguine-python-git
+git clone https://github.com/rigatoni/linguine-python linguine-python-git
+cd linguine-python-git
+git checkout dev
+pip install -r requirements.txt
 
 # copy linguine-node.service to /etc/systemd/system/linguine-node.service
 sudo vim /etc/systemd/system/linguine-node.service
