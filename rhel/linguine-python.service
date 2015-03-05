@@ -1,0 +1,18 @@
+# /etc/systemd/system/multi-user.target.wants/linguine-python.service
+
+[Unit]
+Description=SystemD startup script for linguine-python
+After=mongod.service
+
+[Service]
+WorkingDirectory=/var/www/linguine-python
+ExecStart=/bin/sh -c "/usr/bin/python3 -m linguine.webserver"
+Restart=always
+StandardOutput=syslog
+StandardError=syslog
+SyslogIdentifier=linguine-python
+User=nginx
+Environment=NODE_ENV=production
+
+[Install]
+WantedBy=multi-user.target
