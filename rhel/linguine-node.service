@@ -1,0 +1,17 @@
+# /etc/systemd/system/multi-user.target.wants/linguine-node.service
+
+[Unit]
+Description=SystemD startup script for linguine-node
+After=mongod.service
+
+[Service]
+ExecStart=/bin/sh -c "/bin/node /var/www/linguine-node/bin/www"
+Restart=always
+StandardOutput=syslog
+StandardError=syslog
+SyslogIdentifier=linguine-node
+User=nginx
+Environment=NODE_ENV=production LDAP_URL=ldaps://ldap.rit.edu
+
+[Install]
+WantedBy=multi-user.target
