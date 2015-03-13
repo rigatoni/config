@@ -5,12 +5,8 @@
 # install nginx
 sudo yum install -y nginx
 
-# create mongodb repo file
-echo "[mongodb-org-2.6]" | sudo tee --append /etc/yum.repos.d/mongodb-org-2.6.repo
-echo "name=MongoDB 2.6 Repository" | sudo tee --append /etc/yum.repos.d/mongodb-org-2.6.repo
-echo "baseurl=http://downloads-distro.mongodb.org/repo/redhat/os/x86_64/" | sudo tee --append /etc/yum.repos.d/mongodb-org-2.6.repo
-echo "gpgcheck=0" | sudo tee --append /etc/yum.repos.d/mongodb-org-2.6.repo
-echo "enabled=1" | sudo tee --append /etc/yum.repos.d/mongodb-org-2.6.repo
+# create mongodb repository file from github
+sudo wget -q https://raw.githubusercontent.com/rigatoni/config/master/rhel/mongodb-org-2.6.repo -O /etc/yum.repos.d/mongodb-org-2.6.repo
 
 # install mongodb
 sudo yum install -y mongodb-org
@@ -46,3 +42,19 @@ sudo yum install http://mirror.rit.edu/centos/7/os/x86_64/Packages/lapack-devel-
 cd /var/www/linguine-python-git
 sudo pip3.4 install -r requirements.txt # give this some time (...a lot of time)
 python3 -m textblob.download_corpora # install trained models
+
+# copy system daemon files from github
+sudo wget -q https://raw.githubusercontent.com/rigatoni/config/master/rhel/linguine-node.service -O /etc/systemd/system/multi-user.target.wants/linguine-node.service
+sudo wget -q https://raw.githubusercontent.com/rigatoni/config/master/rhel/linguine-python.service -O /etc/systemd/system/multi-user.target.wants/linguine-python.service
+sudo wget -q https://raw.githubusercontent.com/rigatoni/config/master/no_arch/nginx.conf -O /etc/nginx/nginx.conf
+
+# start mongo
+sudo service mongod start
+
+# refresh daemon files
+sudo systemctl daemon-reload
+
+# start services
+sudo service mongod start
+sudo service linguine-node start
+sudo service linguine-python start
