@@ -1,5 +1,5 @@
 # setup.sh
-# description: Install necessary infrastructure to run linguine in a production enviornment on RHEL.
+# description: Install necessary infrastructure to run linguine in a production enviornment on RHEL (Red Hat).
 # author: peter mikitsh
 
 # install nginx
